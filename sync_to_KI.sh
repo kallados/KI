@@ -4,7 +4,6 @@ set -euo pipefail
 SRC="/workspace/"
 DST="/workspace/KI/"
 
-# nicht parallel laufen lassen
 exec 9>/workspace/ki_sync.lock
 flock -n 9 || exit 0
 
@@ -12,6 +11,10 @@ rsync -a --delete \
   --exclude='KI/' \
   --exclude='.git/' \
   --exclude='.gitignore' \
+  --exclude='.venv-backups/' \
+  --exclude='snapshots/' \
+  --exclude='*.lock' \
+  --exclude='*.pid' \
   --exclude='.hf_home/' \
   --exclude='adapters/' \
   --exclude='runs/' \
@@ -26,7 +29,6 @@ rsync -a --delete \
   --exclude='*.out' \
   "$SRC" "$DST" || {
     rc=$?
-    # rsync 24 = "vanished files" (bei laufenden Prozessen), tolerieren
     [ "$rc" -eq 24 ] && exit 0
     exit "$rc"
   }

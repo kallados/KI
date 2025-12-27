@@ -1,0 +1,6 @@
+
+.venv-backups/
+snapshots/
+KI/
+*.lock
+*.pid

@@ -23,8 +23,15 @@ rsync -a --delete \
   --exclude='clean_data_norm/' \
   --exclude='clean_data_val/' \
   --exclude='models/' \
-  --exclude='__pycache__/' \
-  --exclude='.ipynb_checkpoints/' \
+  --exclude='__pycache__' \
+  --exclude='.ipynb_checkpoints' \
+  --exclude='.pytest_cache' \
+  --exclude='.mypy_cache' \
+  --exclude='.ruff_cache' \
+  --exclude='.cache' \
+  --exclude='*.bckp' \
+  --exclude='workspace_tree.txt' \
+  --exclude='workspace_du.txt' \
   --exclude='*.log' \
   --exclude='*.out' \
   "$SRC" "$DST" || {

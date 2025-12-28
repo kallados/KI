@@ -4,3 +4,4 @@ snapshots/
 KI/
 *.lock
 *.pid
+.ipynb_checkpoints/
